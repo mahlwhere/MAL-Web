@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>mahlwhere // dashboard</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- yaku style console -->
+  <div id="dropdown-terminal" class="terminal-drawer">
+    <div class="terminal-header">
+      <span>mahlwhere@theInterwebs:~ (bukkake)</span>
+      <button id="close-terminal-btn" class="terminal-close">&times;</button>
+    </div>
+    <div id="terminal-output" class="terminal-output">
+      <div class="terminal-line">Type <span class="cmd-highlight">'help'</span> to see available commands.</div>
+    </div>
+    <div class="terminal-prompt-row">
+      <span class="prompt-symbol">$</span>
+      <input type="text" id="terminal-input" placeholder="enter command..." autocomplete="off" spellcheck="false">
+    </div>
+  </div>
+
+  <!-- navbar -->
+  <header class="top-nav">
+    <button id="toggle-terminal-btn" class="nav-btn">[~] terminal (press `)</button>
+    <div class="nav-right">
+      <div id="live-clock" class="clock-display">Loading clocks...</div>
+      <button id="theme-btn" class="theme-toggle">☀ / ☾</button>
+    </div>
+  </header>
+
+  <!-- main grid -->
+  <main class="dashboard-grid">
+
+    <!-- discord status -->
+    <section class="card" id="discord-card">
+      <div class="card-header">
+        <span class="card-label">Discord Status</span>
+        <span class="badge" id="discord-badge">Offline</span>
+      </div>
+      <div class="user-row">
+        <img id="discord-avatar" src="https://via.placeholder.com/48" alt="Avatar" class="avatar">
+        <div>
+          <div class="primary-text" id="discord-username">mahlwhere</div>
+          <div class="sub-text" id="discord-subtext">Connecting to Lanyard...</div>
+        </div>
+      </div>
+      <div class="card-actions">
+        <a id="discord-add-link" href="#" target="_blank" class="action-btn">+ Add on Discord</a>
+      </div>
+    </section>
+
+    <!-- steam status -->
+    <section class="card" id="steam-card">
+      <div class="card-header">
+        <span class="card-label">Steam Activity</span>
+        <span class="badge" id="steam-badge">Away</span>
+      </div>
+      <div class="primary-text" id="steam-game-name">No active game</div>
+      <div class="sub-text" id="steam-game-detail">Profile sync ready</div>
+    </section>
+
+    <!-- github feed -->
+    <section class="card" id="github-card">
+      <div class="card-header">
+        <span class="card-label">GitHub Activity</span>
+        <span class="sub-text">MAL-Web</span>
+      </div>
+      <div id="github-events" class="feed-container">
+        <div class="feed-item">Fetching recent pushes...</div>
+      </div>
+    </section>
+
+    <!-- fastfetch/specs -->
+    <section class="card fastfetch-card">
+      <div class="card-header">
+        <span class="card-label">Host & Rig Specifications</span>
+      </div>
+      <div class="fastfetch-wrapper">
+        <pre class="arch-ascii">
+                  -`                     
+                 .o+`                    
+                `ooo/                   
+               `+oooo:                   
+              `+oooooo:                 
+              -+oooooo+:                 
+            `/:-:++oooo+:                
+           `/++++/+++++++:               
+          `/++++++++++++++:              
+         `/+++ooooooooooooo/`            
+        ./ooosssso++osssssso+`           
+       .oossssso-````/ossssss+`          
+      -osssssso.      :ssssssso.         
+     :osssssss/        osssso+++.        
+    /ossssssss/        +ssssooo/-        
+  `/ossssso+/:-        -:/+osssso+-      
+ `+sso+:-`                 `.-/+oso:     
+`++:.                           `-/+/    
+.`                                 `/    
+</pre>
+        <div class="specs-table">
+          <div><span class="key">OS:</span> <span class="val">Arch Linux x86_64</span></div>
+          <div><span class="key">Host:</span> <span class="val">Corsair VENGEANCE i7600</span></div>
+          <div><span class="key">Kernel:</span> <span class="val">Linux 7.2.6-arch2-1</span></div>
+          <div><span class="key">Shell:</span> <span class="val">bash 5.3.15</span></div>
+          <div><span class="key">Display (OMEN 27qs):</span> <span class="val">2560x1440 in 27", 240hz</span></div>
+          <div><span class="key">Display (XV271U M3):</span> <span class="val">2560x1440 in 27", 240hz</span></div>
+          <div><span class="key">Display (XG27AQDMGR):</span> <span class="val">2560x1440 in 27", 240hz</span></div>
+          <div><span class="key">Desktop Environment:</span> <span class="val">KDE Plasma 6.7.5</span></div>
+          <div><span class="key">Window Manager:</span> <span class="val">KWin (Wayland)</span></div>
+          <div><span class="key">CPU:</span> <span class="val">Intel Core Ultra 7 265K (8+12) @ 5.90GHz</span></div>
+          <div><span class="key">GPU:</span> <span class="val">NVIDIA GeForce RTX 4070 Ti SUPER</span></div>
+          <div><span class="key">Memory:</span> <span class="val">32GB (2x16GB) DDR5-6400 CL32</span></div>
+          <div><span class="key">Web Stack:</span> <span class="val">Caddy / Docker / Debian 12</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- media card -->
+    <section class="card media-card">
+      <div class="card-header">
+        <span class="card-label">Media Reel</span>
+        <span class="sub-text" id="carousel-count">1 / 1</span>
+      </div>
+      <div class="media-viewer">
+        <div id="media-content" class="media-placeholder">[ Media Preview Reel ]</div>
+      </div>
+      <div class="carousel-controls">
+        <button id="carousel-prev" class="action-btn">&lt; Prev</button>
+        <button id="carousel-next" class="action-btn">Next &gt;</button>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
