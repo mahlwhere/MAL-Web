@@ -39,7 +39,7 @@ body::after {
   pointer-events: none; /* Lets you click the dashboard through the overlay */
   
   /* scanlines */
-  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.06) 50%);
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.15) 50%);
   background-size: 100% 4px;
   
   /* vignette */
@@ -50,9 +50,9 @@ body::after {
 }
 
 @keyframes crt-flicker {
-  0% { opacity: 0.95; }
+  0% { opacity: 0.85; }
   50% { opacity: 1; }
-  100% { opacity: 0.98; }
+  100% { opacity: 0.90; }
 }
 
 /* yaku style console */
