@@ -278,3 +278,7 @@ body::after {
 ::-webkit-scrollbar-thumb:hover {
   background: var(--subtext);
 }
+
+.terminal-line {
+  white-space: pre-wrap;
+}
