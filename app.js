@@ -7,3 +7,4 @@ import './js/steam.js';
 import './js/discord.js';
 import './js/carousel.js';
 import './js/fastfetch.js';
+import './js/countdown.js';
