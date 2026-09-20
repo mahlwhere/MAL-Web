@@ -58,21 +58,30 @@ body::after {
 /* yaku style console */
 .terminal-drawer {
   position: fixed;
-  top: -420px;
+  top: 0;
   left: 0;
   width: 100%;
   height: 380px;
+  min-height: 200px;
+  max-height: 90vh;
+  resize: vertical;
+  overflow: hidden; 
+  transform: translateY(calc(-100% - 40px));
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  
   background: var(--terminal-bg);
   border-bottom: 2px solid var(--arch-cyan);
   box-shadow: 0 10px 30px rgba(0,0,0,0.6);
-  transition: top 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   z-index: 1000;
   display: flex;
   flex-direction: column;
   color: #58a6ff;
   font-family: monospace;
 }
-.terminal-drawer.open { top: 0; }
+
+.terminal-drawer.open { 
+  transform: translateY(0); 
+}
 .terminal-header {
   background: #161b22;
   border-bottom: 1px solid var(--border);
