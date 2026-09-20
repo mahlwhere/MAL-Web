@@ -167,9 +167,15 @@ body::after {
 
 /* responsiveness stuff */
 @media (max-width: 900px) {
-  .dashboard-grid { grid-template-columns: 1fr; }
+  body { padding: 12px; }
+  .dashboard-grid { grid-template-columns: 1fr; gap: 12px; }
+  .top-nav { flex-direction: column; align-items: stretch; gap: 12px; }
+  .nav-right { justify-content: space-between; width: 100%; }
+  .nav-btn, .theme-toggle { text-align: center; }
   .fastfetch-card { grid-column: span 1; }
-  .fastfetch-wrapper { flex-direction: column; align-items: flex-start; }
+  .fastfetch-wrapper { flex-direction: column; align-items: flex-start; gap: 16px; width: 100%; overflow-x: auto; }
+  .arch-ascii { font-size: 0.65rem; }
+  .specs-table { font-size: 0.75rem; }
 }
 
 /* github feed stuff */
