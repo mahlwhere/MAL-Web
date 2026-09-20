@@ -4,7 +4,15 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>mahlwhere // dashboard</title>
+  
+  <!-- api preconnect -->
+  <link rel="preconnect" href="https://api.github.com">
+  <link rel="preconnect" href="https://api.lanyard.rest">
+  <link rel="preconnect" href="https://cdn.discordapp.com">
+
   <link rel="stylesheet" href="style.css">
+  
+  <script type="module" src="app.js" defer></script>
 </head>
 <body>
 
@@ -74,50 +82,17 @@
       </div>
     </section>
 
-    <!-- fastfetch/specs -->
-    <section class="card fastfetch-card">
+    <!-- countdown tracker -->
+    <section class="card" id="countdown-card">
       <div class="card-header">
-        <span class="card-label">Host & Rig Specifications</span>
+        <span class="card-label">Upcoming Drops</span>
       </div>
-      <div class="fastfetch-wrapper">
-        <pre class="arch-ascii">
-                  -`                     
-                 .o+`                    
-                `ooo/                   
-               `+oooo:                   
-              `+oooooo:                  
-              -+oooooo+:                 
-            `/:-:++oooo+:                
-           `/++++/+++++++:               
-          `/++++++++++++++:              
-         `/+++ooooooooooooo/`            
-        ./ooosssso++osssssso+`           
-       .oossssso-````/ossssss+`          
-      -osssssso.      :ssssssso.         
-     :osssssss/        osssso+++.        
-    /ossssssss/        +ssssooo/-        
-  `/ossssso+/:-        -:/+osssso+-      
- `+sso+:-`                 `.-/+oso:     
-`++:.                           `-/+/    
-.`                                 `/    
-</pre>
-        <div class="specs-table">
-          <div><span class="key">OS:</span> <span class="val">Arch Linux x86_64</span></div>
-          <div><span class="key">Host:</span> <span class="val">Corsair VENGEANCE i7600</span></div>
-          <div><span class="key">Kernel:</span> <span class="val">Linux 7.2.6-arch2-1</span></div>
-          <div><span class="key">Shell:</span> <span class="val">bash 5.3.15</span></div>
-          <div><span class="key">Display (OMEN 27qs):</span> <span class="val">2560x1440 in 27", 240hz</span></div>
-          <div><span class="key">Display (XV271U M3):</span> <span class="val">2560x1440 in 27", 240hz</span></div>
-          <div><span class="key">Display (XG27AQDMGR):</span> <span class="val">2560x1440 in 27", 240hz</span></div>
-          <div><span class="key">Desktop Environment:</span> <span class="val">KDE Plasma 6.7.5</span></div>
-          <div><span class="key">Window Manager:</span> <span class="val">KWin (Wayland)</span></div>
-          <div><span class="key">CPU:</span> <span class="val">Intel Core Ultra 7 265K (8+12) @ 5.90GHz</span></div>
-          <div><span class="key">GPU:</span> <span class="val">NVIDIA GeForce RTX 4070 Ti SUPER</span></div>
-          <div><span class="key">Memory:</span> <span class="val">32GB (2x16GB) DDR5-6400 CL32</span></div>
-          <div><span class="key">Web Stack:</span> <span class="val">Caddy / Docker / Debian 12</span></div>
-        </div>
+      <div id="countdown-list" style="display: flex; flex-direction: column; gap: 12px; margin-top: 8px;">
       </div>
     </section>
+
+    <!-- fastfetch placeholder -->
+    <div id="fastfetch-container"></div>
 
     <!-- media card -->
     <section class="card media-card">
@@ -133,9 +108,18 @@
         <button id="carousel-next" class="action-btn">Next &gt;</button>
       </div>
     </section>
-
   </main>
 
-  <script src="app.js"></script>
+  <template id="commit-template">
+    <div class="feed-item">
+    <div style="display: flex; justify-content: space-between; gap: 8px;">
+      <a href="#" target="_blank" class="commit-msg"></a>
+      <span class="commit-time"></span>
+    </div>
+    <div style="font-size: 0.72rem; color: var(--subtext); margin-top: 2px;">
+      <code class="commit-sha" style="color: var(--arch-cyan);"></code> by <span class="commit-author"></span>
+    </div>
+  </div>
+</template>
 </body>
 </html>
