@@ -6,6 +6,19 @@ const steamBadge = document.getElementById('steam-badge');
 const steamGame = document.getElementById('steam-game-name');
 const steamDetail = document.getElementById('steam-game-detail');
 
+function updateCardBackground(appId) {
+  if (!steamCard) return;
+  if (appId) {
+    const bannerUrl = `https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/${appId}/header.jpg`;
+    steamCard.style.backgroundImage = `linear-gradient(rgba(18, 20, 24, 0.85), rgba(18, 20, 24, 0.95)), url('${bannerUrl}')`;
+    steamCard.style.backgroundSize = 'cover';
+    steamCard.style.backgroundPosition = 'center';
+    steamCard.style.backgroundRepeat = 'no-repeat';
+  } else {
+    steamCard.style.backgroundImage = 'none';
+  }
+}
+
 async function fetchSteamStatus() {
   if (!steamGame) return;
 
@@ -22,6 +35,8 @@ async function fetchSteamStatus() {
       }
       steamGame.textContent = player.gameextrainfo;
       if (steamDetail) steamDetail.textContent = "Currently playing";
+
+      updateCardBackground(player.gameid);
       return;
     }
 
@@ -40,15 +55,19 @@ async function fetchSteamStatus() {
         const hours = Math.round(topGame.playtime_2weeks / 60);
         steamDetail.textContent = `${hours} hrs past 2 weeks`;
       }
+
+      updateCardBackground(topGame.appid);
     } else {
       steamGame.textContent = "No recent activity";
       if (steamDetail) steamDetail.textContent = "Offline";
+      updateCardBackground(null);
     }
 
   } catch (err) {
     console.error("Steam API error:", err);
     steamGame.textContent = "API Offline";
     if (steamDetail) steamDetail.textContent = "Connection error";
+    updateCardBackground(null);
   }
 }
 
