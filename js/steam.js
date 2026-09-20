@@ -1,49 +1,39 @@
 // js/steam.js
-import { $, ui } from './ui.js';
 
-async function fetchSteamActivity() {
-  if (!ui.steam.name) return;
+const steamTitle = document.querySelector('.steam-card .card-label');
+const steamGame = document.querySelector('.steam-card .primary-text');
+
+async function fetchSteamStatus() {
+  if (!steamTitle || !steamGame) return;
 
   try {
-    const res = await fetch('/api/steam');
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const summaryRes = await fetch('/api/steam/summary');
+    const summaryData = await summaryRes.json();
+    const player = summaryData.response.players[0];
 
-    const data = await res.json();
-    const games = data.response?.games;
-
-    if (games && games.length > 0) {
-      const recent = games[0];
-      const hoursPast2Weeks = (recent.playtime_2weeks / 60).toFixed(1);
-      const totalHours = (recent.playtime_forever / 60).toFixed(1);
-
-      ui.steam.name.textContent = recent.name;
-      ui.steam.detail.textContent = `${hoursPast2Weeks} hrs past 2 weeks • ${totalHours} hrs total`;
-
-      ui.steam.badge.textContent = 'Active / Recent';
-      ui.steam.badge.classList.add('online');
-
-      let imgEl = $('steam-game-icon');
-      if (!imgEl && recent.appid) {
-        imgEl = document.createElement('img');
-        imgEl.id = 'steam-game-icon';
-        imgEl.style.width = '100%';
-        imgEl.style.borderRadius = '4px';
-        imgEl.style.marginTop = '8px';
-        imgEl.src = `https://cdn.cloudflare.steamstatic.com/steam/apps/${recent.appid}/header.jpg`;
-        ui.steam.card.appendChild(imgEl);
-      }
-    } else {
-      ui.steam.name.textContent = 'Offline / Inactive';
-      ui.steam.detail.textContent = 'No game played in the last 2 weeks';
-      ui.steam.badge.textContent = 'Offline';
-      ui.steam.badge.classList.remove('online');
+    if (player && player.gameextrainfo) {
+      steamTitle.textContent = "Currently Playing";
+      steamTitle.style.color = "var(--green)";
+      steamGame.textContent = player.gameextrainfo;
+      return;
     }
+
+    const recentRes = await fetch('/api/steam');
+    const recentData = await recentRes.json();
+    
+    if (recentData.response.games && recentData.response.games.length > 0) {
+      steamTitle.textContent = "Recently Played";
+      steamTitle.style.color = "var(--subtext)"; 
+      steamGame.textContent = recentData.response.games[0].name;
+    } else {
+      steamGame.textContent = "No recent activity";
+    }
+
   } catch (err) {
-    ui.steam.name.textContent = 'Steam Sync Unavailable';
-    ui.steam.detail.textContent = 'Check API endpoint';
-    ui.steam.badge.textContent = 'Error';
+    console.error("Steam API error:", err);
+    steamGame.textContent = "API Offline";
   }
 }
 
-fetchSteamActivity();
-setInterval(fetchSteamActivity, 300000);
+fetchSteamStatus();
+setInterval(fetchSteamStatus, 60000);
