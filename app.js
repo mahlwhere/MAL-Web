@@ -81,12 +81,12 @@ function handleCommand(cmd) {
   switch (cmd) {
     case 'help':
       printOutput("Available commands:");
-      printOutput("  help       - show this manual");
-      printOutput("  clear      - wipe terminal screen");
-      printOutput("  fastfetch  - print system summary");
-      printOutput("  theme light- switch to light theme");
-      printOutput("  theme dark - switch to dark theme");
-      printOutput("  repo       - link to MAL-Web GitHub repo");
+      printOutput("help       - show this manual");
+      printOutput("clear      - wipe terminal screen");
+      printOutput("fastfetch  - print system summary");
+      printOutput("theme light- switch to light theme");
+      printOutput("theme dark - switch to dark theme");
+      printOutput("repo       - link to MAL-Web GitHub repo");
       break;
     case 'clear':
       termOutput.innerHTML = '';
@@ -143,7 +143,7 @@ async function fetchLatestCommits() {
       const fullMessage = item.commit.message;
       const title = fullMessage.split('\n')[0];
       
-      // realtive time format conversion
+      // relative time format conversion
       const commitDate = new Date(item.commit.author.date);
       const timeAgo = formatTimeAgo(commitDate);
 
