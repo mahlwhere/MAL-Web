@@ -295,11 +295,12 @@ body::after {
 
 .ascii-art {
   display: block;
-  font-family: 'Courier New', Courier, monospace;
+  font-family: ui-monospace, "Cascadia Code", "Source Code Pro", Menlo, Consolas, "DejaVu Sans Mono", monospace;
   white-space: pre !important;
-  line-height: 1.05;
-  letter-spacing: 0;
+  line-height: 1.2;               /* Restores proper vertical height on 4K */
+  letter-spacing: 0.05em;         /* Slight horizontal breathing room */
+  font-variant-ligatures: none;   /* Prevents ligature merging on == or -- */
+  font-size: clamp(0.55rem, 0.8vw, 1.1rem); /* Scales nicely up to 4K */
   overflow-x: auto;
-  font-size: clamp(0.5rem, 0.72vw, 0.85rem);
-  margin: 6px 0;
+  margin: 8px 0;
 }
