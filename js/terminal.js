@@ -34,9 +34,9 @@ if (ui.term.input) {
   });
 }
 
-function printOutput(text, isError = false) {
-  const line = document.createElement('div');
-  line.className = 'terminal-line';
+function printOutput(text, isError = false, isAscii = false) {
+  const line = document.createElement(isAscii ? 'pre' : 'div');
+  line.className = isAscii ? 'ascii-art' : 'terminal-line';
   if (isError) line.style.color = '#f85149';
   line.textContent = text;
   ui.term.output.appendChild(line);
@@ -79,7 +79,6 @@ function handleCommand(cmd) {
       printOutput("Opening GitHub repository...");
       break;
 case 'ellie':
-      // The backticks let you paste multi-line strings perfectly intact
       const goldenArt = `     
                                    ::::::::::::                         
                               :::::---:::::-::::::                      
@@ -114,7 +113,7 @@ case 'ellie':
 
 Good girl.
       `;
-      printOutput(goldenArt);
+      printOutput(goldenArt, false, true);
       break;
     default:
       printOutput(`command not found: ${cmd}. Type 'help' for options.`, true);
